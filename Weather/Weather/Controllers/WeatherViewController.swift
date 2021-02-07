@@ -9,7 +9,9 @@ import UIKit
 
 class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayout  {
 
-    var city: String? 
+    var city: String?
+    lazy var weatherService = WeatherService()
+    
     
     
     @IBOutlet weak var weekDayPicker: WeekDayPicker!
@@ -23,8 +25,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
     override func viewDidLoad() {
         super.viewDidLoad()
         title = city
-
-        // Do any additional setup after loading the view.
+        weatherService.loadWeatherData(city: "Moscow")
     }
     
 
