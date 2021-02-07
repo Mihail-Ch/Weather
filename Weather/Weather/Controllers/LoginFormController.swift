@@ -23,19 +23,44 @@ class LoginFormController: UIViewController {
         touchKeyboard()
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        let checkResult = checkUserData()
+        if !checkResult {
+            showLoginError()
+        }
+        return checkResult
+    }
+    
+    func checkUserData() -> Bool {
+        guard
+            let login = loginInput.text,
+            let password = passwordInput.text else {return false}
+        if login == "" && password == "" {
+            return true
+        } else {
+            return false
+            
+        }
+    }
+    
+    func showLoginError() {
+        // Создаем контроллер
+        let alert = UIAlertController(title: "Error", message: "Введены неверные данные пользователя", preferredStyle: .alert)
+        // Создаем кнопку для UIAlertController
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        // Добавляем кнопку на UIAlertController
+        alert.addAction(action)
+        // Показываем UIAlertController
+        present(alert, animated: true, completion: nil)
+        
+        
+    }
+    
     
     //MARK: - Action
     
-    @IBAction func loginButtonPressed(_ sender: Any) {
-        let login = loginInput.text!
-        let password = passwordInput.text!
-        
-        if login == "" && password == "" {
-            print("успешная авторизация")
-        } else {
-            print("неуспешная авторизация")
-        }
-    }
+    @IBAction func loginButtonPressed(_ sender: Any) { }
     
 }
 
